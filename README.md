@@ -1,4 +1,4 @@
-![Screenshot from Tidbit](screenshot.png)
+![Screenshot from Tidbit](https://i.imgur.com/rs5nssf.png)
 # 🖊️ Tidbit
 A lightweight, dead-simple web-based text editor.
 ## Premise
