@@ -1,6 +1,49 @@
+var wordCount = 0
+var charCount = 0
+onload = (e) => {
+    wordCount = getWordCount()
+    charCount = getCharCount()
+    setCount()
+}
+
 function changed() {
     localStorage.setItem("story", document.getElementById("story").value.split("\n").join("\\n"))
+    wordCount = getWordCount()
+    charCount = getCharCount()
+    setCount()
 }
+var charQ = false
+function setCount() {
+    if (charQ) {
+        document.getElementsByClassName("count")[0].innerText = charCount + " characters"
+    } else {
+        document.getElementsByClassName("count")[0].innerText = wordCount + " words"
+    }
+}
+
+function char() {
+    charQ = !charQ
+    setCount()
+}
+
+function getWordCount() {
+    if (document.getElementById("story").value.replaceAll("\n", " ").match(/([0-9a-zA-Z ])/g) != null) {
+        countStr = document.getElementById("story").value.replaceAll("\n", " ").match(/([0-9a-zA-Z ])/g).join("")
+        while (countStr.includes("  ")) {
+            countStr = countStr.replaceAll("  ", " ")
+        }
+        if (countStr.endsWith(" ")) {
+            countStr = countStr.slice(0, -1)
+        }
+        return countStr.split(" ").length
+    } else {
+        return 0
+    }
+}
+function getCharCount() {
+    return document.getElementById("story").value.length
+}
+
 function titleChanged() {
     localStorage.setItem("title", document.getElementById("title").value)
 }

@@ -11,7 +11,10 @@
 <body>
 	<input type="text" placeholder="Title" id="title" oninput="titleChanged()">
 	<br>
-	<textarea placeholder="Once upon a time..." id="story" oninput="changed()"></textarea>
+	<div class="storyContainer">
+		<textarea placeholder="Once upon a time..." id="story" oninput="changed()"></textarea>
+		<p class="count" onmouseover="char()" onmouseleave="char()">2 words</p>
+	</div>
 	<button onclick="download_file('my_tidbit.txt', dynamic_text())">Download</button>
 	<script src="app.js"></script>
 </body>
