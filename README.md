@@ -1,5 +1,5 @@
-# 🖊️
-# Tidbit
+![Screenshot from Tidbit](screenshot.png)
+# 🖊️ Tidbit
 A lightweight, dead-simple web-based text editor.
 ## Premise
 Text editors nowadays are complicated. Really complicated. But writing is simple - words on a page tell a story. That's it.  
