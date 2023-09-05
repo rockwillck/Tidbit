@@ -10,6 +10,10 @@ Tidbit runs entirely in the browser, but because everthing is stored locally, yo
 ```
 ! TIDBIT STORES TEXT IN LOCALSTORAGE. THAT MEANS IF YOU CLEAR YOUR CACHE, YOU LOSE YOUR WORK. MAKE SURE TO DOWNLOAD AS YOU GO.
 ```
+## Exception
+Yes, Tidbit is a minimal, bare-bones only editor. It's meant to be that way. There's one exception: sessions.  
+Being able to write and edit more than one piece at once is important to me. So though an argument can easily and obviously be made that such a change both encourages a lack of focus on one objective while also complicating the tool, Tidbit will have sessions.  
+That is the only exception.
 ## Web Version
 There is a version hosted online [here](https://www.rockwill.dev/Tidbit).
 ## License
