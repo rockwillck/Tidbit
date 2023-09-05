@@ -15,7 +15,21 @@
 		<textarea placeholder="Once upon a time..." id="story" oninput="changed()"></textarea>
 		<p class="count" onmouseover="char()" onmouseleave="char()">2 words</p>
 	</div>
-	<button onclick="download_file('my_tidbit.txt', dynamic_text())">Download</button>
+	<div class="sessionDialogueContainer">
+		<div class="sessionDialogue">
+			<p class="sessionTitle">Sessions</p>
+			<div class="sessions" id="sessions">
+				<button class="sessionBtn" onclick="newSession()">New Session</button>
+			</div>
+		</div>
+	</div>
+	<div class="btns">
+		<button onclick="download_file('my_tidbit.txt', dynamic_text())" class="download">Download</button>
+		<div class="subBtns">
+			<button onclick="window.location.reload()" class="download">Switch Session</button>
+			<button onclick="deleteSesh()" class="download">Delete Session</button>
+		</div>
+	</div>
 	<script src="app.js"></script>
 </body>
 </html>

@@ -1,13 +1,52 @@
-var wordCount = 0
-var charCount = 0
-onload = (e) => {
+var session = ""
+for (set of Object.entries(localStorage)) {
+    let key = set[0]
+    if (!key.endsWith("Title") && !key.endsWith("Story")) {
+        let list = document.getElementById("sessions")
+        let sessionBtn = document.createElement("button")
+        sessionBtn.className = "sessionBtn"
+        sessionBtn.innerText = localStorage.getItem(key + "Title")
+        sessionBtn.addEventListener("click", () => {
+            session = key
+            dismiss()
+        })
+        list.appendChild(sessionBtn)
+    }
+}
+
+console.log(Object.entries(localStorage).map(x => x[0]))
+
+function newSession() {
+    id = Object.entries(localStorage).length
+    localStorage.setItem(`S${id}`,"")
+    localStorage.setItem(`S${id}Title`,"New Tidbit")
+    localStorage.setItem(`S${id}Story`,"")
+    session = "S" + id
+    dismiss()
+}
+
+function dismiss() {
+    document.getElementsByClassName("sessionDialogueContainer")[0].style.scale = "0"
+
+    console.log(localStorage.getItem(session + "Story"), localStorage.getItem(session + "Title"), session)
+    if (localStorage.getItem(session + "Story")) {
+        document.getElementById("story").value = localStorage.getItem(session + "Story").replaceAll("\\n", "\n")
+    }
+
+    if (localStorage.getItem(session + "Title")) {
+        document.getElementById("title").value = localStorage.getItem(session + "Title")
+    }
+
     wordCount = getWordCount()
     charCount = getCharCount()
     setCount()
 }
 
+var wordCount = 0
+var charCount = 0
+
 function changed() {
-    localStorage.setItem("story", document.getElementById("story").value.split("\n").join("\\n"))
+    localStorage.setItem(session+"Story", document.getElementById("story").value.split("\n").join("\\n"))
     wordCount = getWordCount()
     charCount = getCharCount()
     setCount()
@@ -45,15 +84,7 @@ function getCharCount() {
 }
 
 function titleChanged() {
-    localStorage.setItem("title", document.getElementById("title").value)
-}
-
-if (localStorage.getItem("story")) {
-    document.getElementById("story").value = localStorage.getItem("story").replaceAll("\\n", "\n")
-}
-
-if (localStorage.getItem("title")) {
-    document.getElementById("title").value = localStorage.getItem("title")
+    localStorage.setItem(session+"Title", document.getElementById("title").value)
 }
 
 function insertTextAtCursor(el, text) {
@@ -109,4 +140,13 @@ function download_file(name, contents, mime_type) {
 
     dlink.click();
     dlink.remove();
+}
+
+function deleteSesh() {
+    if (confirm("Are you sure you want to delete this session? This decision is permanent.") == true) {
+        localStorage.removeItem(session)
+        localStorage.removeItem(session + "Title")
+        localStorage.removeItem(session + "Story")
+        window.location.reload()
+    }
 }
