@@ -1,7 +1,7 @@
 var session = ""
 for (set of Object.entries(localStorage)) {
     let key = set[0]
-    if (!key.endsWith("Title") && !key.endsWith("Story")) {
+    if (!key.endsWith("Title") && !key.endsWith("Story") && !(key == "lastSessionId")) {
         let list = document.getElementById("sessions")
         let sessionBtn = document.createElement("button")
         sessionBtn.className = "sessionBtn"
@@ -40,6 +40,13 @@ function dismiss() {
     wordCount = getWordCount()
     charCount = getCharCount()
     setCount()
+
+    localStorage.setItem("lastSessionId", session)
+}
+
+if (localStorage.getItem("lastSessionId") && Object.entries(localStorage).map(x => x[0]).includes(localStorage.getItem("lastSessionId"))) {
+    session = localStorage.getItem("lastSessionId")
+    dismiss()
 }
 
 var wordCount = 0
@@ -149,4 +156,9 @@ function deleteSesh() {
         localStorage.removeItem(session + "Story")
         window.location.reload()
     }
+}
+
+function switchSesh() {
+    localStorage.removeItem("lastSessionId")
+    window.location.reload()
 }
