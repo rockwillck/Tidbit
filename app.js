@@ -14,8 +14,6 @@ for (set of Object.entries(localStorage)) {
     }
 }
 
-console.log(Object.entries(localStorage).map(x => x[0]))
-
 function newSession() {
     id = Object.entries(localStorage).length
     localStorage.setItem(`S${id}`,"")
@@ -25,10 +23,11 @@ function newSession() {
     dismiss()
 }
 
+var wordCount = 0
+var charCount = 0
 function dismiss() {
     document.getElementsByClassName("sessionDialogueContainer")[0].style.scale = "0"
 
-    console.log(localStorage.getItem(session + "Story"), localStorage.getItem(session + "Title"), session)
     if (localStorage.getItem(session + "Story")) {
         document.getElementById("story").value = localStorage.getItem(session + "Story").replaceAll("\\n", "\n")
     }
@@ -39,6 +38,7 @@ function dismiss() {
 
     wordCount = getWordCount()
     charCount = getCharCount()
+    console.log(wordCount, charCount, getWordCount(), getCharCount())
     setCount()
 
     localStorage.setItem("lastSessionId", session)
@@ -48,9 +48,6 @@ if (localStorage.getItem("lastSessionId") && Object.entries(localStorage).map(x 
     session = localStorage.getItem("lastSessionId")
     dismiss()
 }
-
-var wordCount = 0
-var charCount = 0
 
 function changed() {
     localStorage.setItem(session+"Story", document.getElementById("story").value.split("\n").join("\\n"))
